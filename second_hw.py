@@ -1,8 +1,10 @@
 import csv
 from typing import List, Dict, Any
 
+PATH_TO_CSV = '/Users/oleg/Downloads/Corp_Summary.csv'
 
-def make_departments(path_to_csv: str = '/Users/oleg/Downloads/Corp_Summary.csv') -> Dict[str, List[List[Any]]]:
+
+def make_departments(path_to_csv: str) -> Dict[str, List[List[Any]]]:
     """
     Функция, которая создает словарь departments, где ключи - названия департаментов,
     а значения - это списки списков с двумя "столбцами",
@@ -140,24 +142,25 @@ def choice_menu() -> None:
 
     :rtype: None
     """
-    departments = make_departments()
+    departments = make_departments(PATH_TO_CSV)
     while True:
         print('Выберите один из вариантов:')
         print('Введите 1 - Чтобы вывести иерархию команд;')
         print('Введите 2 - Чтобы вывести сводный отчёт;')
         print('Введите 3 - Чтобы сохранить сводный отчёт;')
         print('Введите что-то другое - Чтобы завершить программу;')
-        user_answer = int(input())
+        user_answer = input()
         print()
-        if user_answer == 1:
+        if user_answer == '1':
             department_report(departments)
-        elif user_answer == 2:
+        elif user_answer == '2':
             salary_report_print(departments)
-        elif user_answer == 3:
+        elif user_answer == '3':
             salary_report_save_csv(departments)
         else:
+            print("Конец программы.")
             break
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     choice_menu()
