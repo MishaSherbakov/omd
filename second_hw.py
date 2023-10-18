@@ -6,11 +6,15 @@ PATH_TO_CSV = '/Users/oleg/Downloads/Corp_Summary.csv'
 
 def make_departments(path_to_csv: str) -> Dict[str, List[List[Any]]]:
     """
-    Функция, которая создает словарь departments, где ключи - названия департаментов,
-    а значения - это списки списков с двумя "столбцами",
-    в которых лежит вся нужная информация для наших функций,
-    а именно - "Название отдела" и "Оклад сотрудника", остальная информация отброшена,
-    чтобы не занимать память. Получается своеобразный group_by, но без агрегации.
+    Функция, которая создает словарь departments,
+    где ключи - названия департаментов,
+    а значения - это списки списков
+    с двумя 'столбцами',
+    в которых лежит вся нужная информация для
+    наших функций, а именно - 'Название отдела'
+    и 'Оклад сотрудника', остальная информация отброшена,
+    чтобы не занимать память. Получается своеобразный
+    group_by, но без агрегации.
 
     :param path_to_csv: путь к файлу csv.
     :return: Словарь departments, описанный выше.
@@ -23,19 +27,25 @@ def make_departments(path_to_csv: str) -> Dict[str, List[List[Any]]]:
             if row['Департамент'] not in departments:
                 departments[row['Департамент']] = list()
                 department = row['Департамент']
-                departments[department].append([value for key, value in row.items() if key in ('Отдел', 'Оклад')])
+                departments[department].append(
+                    [value for key, value in row.items() if
+                     key in ('Отдел', 'Оклад')])
             else:
                 department = row['Департамент']
-                departments[department].append([value for key, value in row.items() if key in ('Отдел', 'Оклад')])
+                departments[department].append(
+                    [value for key, value in row.items() if
+                     key in ('Отдел', 'Оклад')])
 
     return departments
 
 
 def department_report(departments: Dict[str, List[List[Any]]]) -> None:
     """
-    Функция, которая выводит в консоль департамент и все команды(отделы), которые входят в него.
+    Функция, которая выводит в консоль департамент и
+    все команды(отделы), которые входят в него.
 
-    :param departments: словарь, содержащий информацию об отделах для каждого департамента.
+    :param departments: словарь, содержащий информацию
+    об отделах для каждого департамента.
     :rtype: None
     """
     department_hierarchy = dict()
@@ -45,15 +55,20 @@ def department_report(departments: Dict[str, List[List[Any]]]) -> None:
         for row in information:
             department_hierarchy[department].add(row[0])
     for department in department_hierarchy:
-        print(f"{department} : {', '.join(map(str, department_hierarchy[department]))}")
+        print('{} : {}'.format(
+            department,
+            ', '.join(map(str, department_hierarchy[department]))
+        ))
     print()
 
 
 def array_calculations(salaries: List[int]) -> Dict[str, Any]:
     """
-    Функция, которая за один проход по массиву считает count, max, min и avg.
+    Функция, которая за один проход по массиву
+    считает count, max, min и avg.
 
-    :param salaries: Столбик с зарплатами людей для конкретного департамента.
+    :param salaries: Столбик с зарплатами
+    людей для конкретного департамента.
     :rtype: None
     """
     answer = dict()
@@ -79,23 +94,32 @@ def array_calculations(salaries: List[int]) -> Dict[str, Any]:
     return answer
 
 
-def make_salary_report(departments: Dict[str, List[List[Any]]]) -> List[List[Any]]:
+def make_salary_report(
+        departments: Dict[str, List[List[Any]]]
+) -> List[List[Any]]:
     """
-    Функция, которая создает таблицу(List[List[]]) salary_report, где первая строка - названия столбцов,
-    остальные строчки - это значения для каждого департамента. Дальше salary_report используется
-    в функциях salary_report_print и salary_report_save_csv в зависимости от запроса пользователя.
+    Функция, которая создает таблицу(List[List[]])
+    salary_report, где первая строка - названия столбцов,
+    остальные строчки - это значения для каждого департамента.
+     Дальше salary_report используется
+    в функциях salary_report_print и salary_report_save_csv в
+    зависимости от запроса пользователя.
 
-    :param departments: словарь, содержащий информацию о зарвлатах для каждого департамента.
+    :param departments: словарь, содержащий
+    информацию о зарвлатах для каждого департамента.
     :return: таблица salary_report
     """
     salary_report = list()
-    salary_report.append(['Депарпамент', 'Кол-во сотрудников', 'Вилка min-max по зарплатам', 'Среднаяя зарплата'])
+    salary_report.append(
+        ['Депарпамент', 'Кол-во сотрудников', 'Вилка min-max по зарплатам',
+         'Среднаяя зарплата'])
     for departament, information in departments.items():
-        calculations = array_calculations([int(column[1]) for column in information])
+        calculations = array_calculations(
+            [int(column[1]) for column in information])
         salary_report.append([
             departament,
             calculations['count'],
-            f"{calculations['min']} - {calculations['max']}",
+            '{} - {}'.format(calculations['min'], calculations['max']),
             calculations['avg']
         ])
     return salary_report
@@ -103,14 +127,18 @@ def make_salary_report(departments: Dict[str, List[List[Any]]]) -> List[List[Any
 
 def salary_report_print(departments: Dict[str, List[List[Any]]]) -> None:
     """
-    Функция, которая выводит в консоль сводный отчёт по департаментам. Для выравнивания
-    используется функция ljust и список columns_width, содержащий ширину наших столбцов.
+    Функция, которая выводит в консоль
+    сводный отчёт по департаментам. Для выравнивания
+    используется функция ljust и список
+    columns_width, содержащий ширину наших столбцов.
 
-    :param departments: словарь, содержащий информацию о зарпоатах для каждого департамента.
+    :param departments: словарь, содержащий
+    информацию о зарпоатах для каждого департамента.
     :rtype: None
     """
     salary_report = make_salary_report(departments)
-    columns_widths = [max(len(str(item)) for item in column) for column in zip(*salary_report)]
+    columns_widths = [max(len(str(item)) for item in column) for column in
+                      zip(*salary_report)]
     for row in salary_report:
         row_str = ''
         for i, item in enumerate(row):
@@ -121,9 +149,11 @@ def salary_report_print(departments: Dict[str, List[List[Any]]]) -> None:
 
 def salary_report_save_csv(departments: Dict[str, List[List[Any]]]) -> None:
     """
-    Функция, сохраняет сводный отчёт по департаментам в файл 'salary_report.csv'
+    Функция, сохраняет сводный отчёт по
+    департаментам в файл 'salary_report.csv'
 
-    :param departments: словарь, содержащий информацию о зарпоатах для каждого департамента.
+    :param departments: словарь, содержащий информацию
+    о зарпоатах для каждого департамента.
     :rtype: None
     """
     salary_report = make_salary_report(departments)
@@ -131,7 +161,7 @@ def salary_report_save_csv(departments: Dict[str, List[List[Any]]]) -> None:
         csv_writer = csv.writer(csv_file)
 
         csv_writer.writerows(salary_report)
-    print("Файл сохранен в salary_report.csv")
+    print('Файл сохранен в salary_report.csv')
     print()
 
 
@@ -158,7 +188,7 @@ def choice_menu() -> None:
         elif user_answer == '3':
             salary_report_save_csv(departments)
         else:
-            print("Конец программы.")
+            print('Конец программы.')
             break
 
 
