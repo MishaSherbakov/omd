@@ -1,0 +1,18 @@
+Trying:
+    encode('SOS')
+Expecting:
+      '... --- ...'
+ok
+Trying:
+    encode('HELLO @ WORLD') # doctest: +IGNORE_EXCEPTION_DETAIL
+Expecting:
+    Traceback (most recent call last):
+    KeyError:
+ok
+1 items had no tests:
+    issue_01
+1 items passed all tests:
+   2 tests in issue_01.encode
+2 tests in 2 items.
+2 passed and 0 failed.
+Test passed.

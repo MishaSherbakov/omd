@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.7, pytest-7.4.3, pluggy-1.3.0 -- /Users/oleg/Documents/omd/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/oleg/Documents/omd/tests
+plugins: cov-4.1.0
+collecting ... collected 4 items
+
+issue_04.py::test_fit_transform_single_string PASSED                     [ 25%]
+issue_04.py::test_fit_transform_list_of_strings PASSED                   [ 50%]
+issue_04.py::test_fit_transform_empty_string PASSED                      [ 75%]
+issue_04.py::test_fit_transform_no_arguments PASSED                      [100%]
+
+============================== 4 passed in 0.01s ===============================
