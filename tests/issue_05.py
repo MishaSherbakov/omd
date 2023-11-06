@@ -38,7 +38,7 @@ def what_is_year_now() -> int:
 
 
 def test_ymd():
-    with patch("urllib.request.urlopen") as mock_request_urlopen:
+    with patch('urllib.request.urlopen') as mock_request_urlopen:
         expected_response = {'currentDateTime': '2023-01-01'}
         mock_request_urlopen.return_value \
             .__enter__.return_value.read.return_value \
@@ -47,7 +47,7 @@ def test_ymd():
 
 
 def test_dmy():
-    with patch("urllib.request.urlopen") as mock_request_urlopen:
+    with patch('urllib.request.urlopen') as mock_request_urlopen:
         expected_response = {'currentDateTime': '01.01.2023'}
         mock_request_urlopen.return_value \
             .__enter__.return_value.read.return_value \
@@ -56,7 +56,7 @@ def test_dmy():
 
 
 def test_no_date():
-    with patch("urllib.request.urlopen") as mock_request_urlopen:
+    with patch('urllib.request.urlopen') as mock_request_urlopen:
         expected_response = {'somethingElse': 'somethingElse'}
         mock_request_urlopen.return_value \
             .__enter__.return_value.read.return_value \
@@ -66,7 +66,7 @@ def test_no_date():
 
 
 def test_wrong_format_slash():
-    with patch("urllib.request.urlopen") as mock_request_urlopen:
+    with patch('urllib.request.urlopen') as mock_request_urlopen:
         expected_response = {'currentDateTime': '2023/01/01'}
         mock_request_urlopen.return_value \
             .__enter__.return_value.read.return_value \
@@ -76,7 +76,7 @@ def test_wrong_format_slash():
 
 
 def test_wrong_format_no_year():
-    with patch("urllib.request.urlopen") as mock_request_urlopen:
+    with patch('urllib.request.urlopen') as mock_request_urlopen:
         expected_response = {'currentDateTime': '01.01'}
         mock_request_urlopen.return_value \
             .__enter__.return_value.read.return_value \

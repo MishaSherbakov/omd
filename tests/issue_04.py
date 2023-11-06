@@ -28,15 +28,15 @@ def fit_transform(*args: str) -> List[Tuple[str, List[int]]]:
 
 def test_fit_transform_single_string():
     # Проверяем, что функция работает с одной строкой
-    input_data = "Moscow"
-    expected_result = [("Moscow", [1])]
+    input_data = 'Moscow'
+    expected_result = [('Moscow', [1])]
     result = fit_transform(input_data)
     assert result == expected_result
 
 
 def test_fit_transform_list_of_strings():
     # Проверяем, что функция работает с списком строк
-    input_data = ["Moscow", "New York", "Moscow", "London"]
+    input_data = ['Moscow', 'New York', 'Moscow', 'London']
     expected_result = [
         ('Moscow', [0, 0, 1]),
         ('New York', [0, 1, 0]),
@@ -49,7 +49,7 @@ def test_fit_transform_list_of_strings():
 
 def test_fit_transform_empty_string():
     # Проверяем, что функция правильно обрабатывает пустые строки
-    input_data = ["Moscow", "", "New York"]
+    input_data = ['Moscow', '', 'New York']
     expected_result = [('Moscow', [0, 0, 1]), ('', [0, 1, 0]),
                        ('New York', [1, 0, 0])]
     result = fit_transform(input_data)

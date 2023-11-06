@@ -35,13 +35,13 @@ def decode(morse_message: str) -> str:
     return ''.join(decoded_letters)
 
 
-@pytest.mark.parametrize("morse_message, expected_result", [
-    ("-- .- .. -....- .--. -.-- - .... --- -. -....- ..--- ----- .---- ----.",
-     "MAI-PYTHON-2019"),
-    (".- -... -.-. -.. .", "ABCDE"),
-    (".. --. .... -... -.. .. .- -.-.", "IGHBDIAC"),
-    ("- .... . -- --- .-. - .... .", "THEMORTHE"),
-    ("-- --- .-. ... . ", "MORSE"),
+@pytest.mark.parametrize('morse_message, expected_result', [
+    ('-- .- .. -....- .--. -.-- - .... --- -. -....- ..--- ----- .---- ----.',
+     'MAI-PYTHON-2019'),
+    ('.- -... -.-. -.. .', 'ABCDE'),
+    ('.. --. .... -... -.. .. .- -.-.', 'IGHBDIAC'),
+    ('- .... . -- --- .-. - .... .', 'THEMORTHE'),
+    ('-- --- .-. ... . ', 'MORSE'),
 ])
 def test_decode(morse_message, expected_result):
     decoded_msg = decode(morse_message)

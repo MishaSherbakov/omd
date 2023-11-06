@@ -30,13 +30,13 @@ class TestFitTransform(unittest.TestCase):
 
     def test_fit_transform_single_string(self):
         # Проверяем, что функция работает с одной строкой
-        input_data = "Moscow"
+        input_data = 'Moscow'
         result = fit_transform(input_data)
-        self.assertIn(("Moscow", [1]), result)
+        self.assertIn(('Moscow', [1]), result)
 
     def test_fit_transform_list_of_strings(self):
         # Проверяем, что функция работает с списком строк
-        input_data = ["Moscow", "New York", "Moscow", "London"]
+        input_data = ['Moscow', 'New York', 'Moscow', 'London']
         expected_result = [
             ('Moscow', [0, 0, 1]),
             ('New York', [0, 1, 0]),
@@ -49,7 +49,7 @@ class TestFitTransform(unittest.TestCase):
 
     def test_fit_transform_empty_string(self):
         # Проверяем, что функция правильно обрабатывает пустые строки
-        input_data = ["Moscow", "", "New York"]
+        input_data = ['Moscow', '', 'New York']
         expected_result = [('Moscow', [0, 0, 1]), ('', [0, 1, 0]),
                            ('New York', [1, 0, 0])]
         result = fit_transform(input_data)
