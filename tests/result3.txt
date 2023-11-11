@@ -1,0 +1,9 @@
+test_fit_transform_empty_string (issue_03.TestFitTransform) ... ok
+test_fit_transform_list_of_strings (issue_03.TestFitTransform) ... ok
+test_fit_transform_no_arguments (issue_03.TestFitTransform) ... ok
+test_fit_transform_single_string (issue_03.TestFitTransform) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
