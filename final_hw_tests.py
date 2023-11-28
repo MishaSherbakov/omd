@@ -25,12 +25,12 @@ def test_order_with_delivery():
 
 def test_order_invalid_pizza_type():
     """
-    Неправильное название пиццы(Pepperoni в таком случае)
+    Неправильное название пиццы
     """
     runner = CliRunner()
     result = runner.invoke(order, ['invalid_argument'])
     assert result.exit_code == 0
-    assert 'Приготовили за' in result.output
+    assert 'Нет в меню' in result.output
 
 
 def test_order_invalid_size_argument():
@@ -39,7 +39,7 @@ def test_order_invalid_size_argument():
     """
     runner = CliRunner()
     result = runner.invoke(order,
-                           ['margherita', '--size', 'invalid_argument'])
+                        ['margherita', '--size', 'invalid_argument'])
     assert result.exit_code != 0
     assert "Error: Invalid value for '--size'" in result.output
 
@@ -75,4 +75,4 @@ def test_menu():
     assert '🧀Margherita : tomato sauce, mozzarella, tomatoes' in result.output
     assert '🍅Pepperoni : tomato sauce, mozzarella, pepperoni' in result.output
     assert '🍍Hawaiian : tomato sauce, mozzarella, chicken, pineapples' \
-           in result.output
+        in result.output
