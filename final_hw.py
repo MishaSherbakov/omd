@@ -181,15 +181,18 @@ def order(pizza_name: str, size: str, delivery: bool):
         delivery (bool): Флаг для указания доставки.
 
     """
+    if pizza_name not in ['margherita', 'pepperoni', 'hawaiian']:
+        print('Нет в меню')
+        return
+    
+    pizza = None
     if pizza_name == 'margherita':
         pizza = Margherita(size)
     elif pizza_name == 'pepperoni':
         pizza = Pepperoni(size)
     elif pizza_name == 'hawaiian':
         pizza = Hawaiian(size)
-    else:
-        # Готовит Пепперони, если ошибка в названии
-        pizza = Pepperoni(size)
+
 
     pizza.cook()
 
