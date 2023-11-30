@@ -21,7 +21,7 @@ def test_create_and_display_advert():
     возвращает корректную строку с цветным текстом.
     """
     iphone_ad = Advert({'title': 'iPhone X', 'price': 100})
-    assert str(iphone_ad) == "\033[33miPhone X | 100 ₽\033[0m"
+    assert str(iphone_ad) == '\033[33miPhone X | 100 ₽\033[0m'
 
 
 def test_access_price_attribute():
